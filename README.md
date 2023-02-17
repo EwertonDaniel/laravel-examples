@@ -4,7 +4,7 @@
   
 ## 🛠 [Server Requirements](https://laravel.com/docs/10.x/deployment#server-requirements)
  
-**`Laravel 10`**
+🛑 **`Laravel 10`**
 
 ⚠️ `PHP >= 8.1`<br/>
 ⚠️ `Ctype PHP Extension`<br/>
