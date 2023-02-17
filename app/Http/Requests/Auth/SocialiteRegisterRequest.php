@@ -10,6 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteRegisterRequest extends FormRequest
 {
+    /**
+     * @var array|string[]
+     * @note A php file can be created inside the "config" folder with an array that has all the available drivers to be validated
+     * or a flag can also be created in the services.php file where they are drivers, so only those that are social drivers can be returned.
+     */
     private array $availableSocialLogin = [
         'apple',
         'facebook',
