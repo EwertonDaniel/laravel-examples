@@ -10,6 +10,15 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteRegisterRequest extends FormRequest
 {
+    private array $availableSocialLogin = [
+        'apple',
+        'facebook',
+        'github',
+        'google',
+        'linkedin' .
+        'tiktok',
+        'twitter',
+    ];
     private string $drive;
 
     /**
@@ -28,14 +37,7 @@ class SocialiteRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'driver' => [Rule::in($this->getAvailableSocialLogin())]
-        ];
-    }
-
-    private function getAvailableSocialLogin(): array
-    {
-        return [
-            'github'
+            'driver' => [Rule::in($this->availableSocialLogin)]
         ];
     }
 

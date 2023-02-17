@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,9 +18,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // ... other providers
+        SocialiteWasCalled::class => [
+            \SocialiteProviders\Apple\AppleExtendSocialite::class . '@handle',
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class . '@handle',
             \SocialiteProviders\GitHub\GitHubExtendSocialite::class . '@handle',
+            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
+            \SocialiteProviders\LinkedIn\LinkedInExtendSocialite::class . '@handle',
+            \SocialiteProviders\TikTok\TikTokExtendSocialite::class . '@handle',
+            \SocialiteProviders\Twitter\TwitterExtendSocialite::class . '@handle',
         ],
     ];
 
