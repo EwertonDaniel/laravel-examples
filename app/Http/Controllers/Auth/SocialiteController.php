@@ -9,8 +9,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
+/**
+ * * @note This php document was created to be refactored as an example.
+ */
 class SocialiteController extends Controller
 {
+    /**
+     * @param SocialiteRegisterRequest $request
+     * @return RedirectResponse
+     */
     public function register(SocialiteRegisterRequest $request): RedirectResponse
     {
         return $request->redirect();

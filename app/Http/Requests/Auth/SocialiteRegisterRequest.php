@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Laravel\Socialite\Facades\Socialite;
 
+/**
+ * * @note This php document was created to be refactored as an example.
+ */
 class SocialiteRegisterRequest extends FormRequest
 {
     /**
