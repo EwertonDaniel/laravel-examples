@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -16,6 +18,7 @@ class SocialiteCallbackRequest extends FormRequest
     private \Laravel\Socialite\Contracts\User $socialData;
     private array $socialUserData;
     private array $socialite;
+    private User $user;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -33,8 +36,8 @@ class SocialiteCallbackRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required', 'string'],
-            'state' => ['required', 'string']
+            //'code' => ['required', 'string'],
+            //'state' => ['required', 'string']
         ];
     }
 
@@ -59,12 +62,16 @@ class SocialiteCallbackRequest extends FormRequest
         $this->socialite = Session::get('_socialite');
     }
 
-    private function getSocialData()
+    private function getSocialData(): void
     {
-        $this->socialData = Socialite::driver('github')->user();
+        $this->socialData = Socialite::driver($this->socialite['driver'])->user();
     }
 
-    private function handleSocialData()
+    /**
+     * @return void
+     * @note Session created to persist the additional data in the database
+     */
+    private function handleSocialData(): void
     {
         $this->socialUserData = [
             'id' => $this->socialData->getId(),
@@ -74,6 +81,7 @@ class SocialiteCallbackRequest extends FormRequest
             'avatar' => $this->socialData->getAvatar(),
             'driver' => $this->socialite['driver']
         ];
+        Session::put('_socialite_data', $this->socialUserData);
     }
 
     /**
@@ -82,12 +90,20 @@ class SocialiteCallbackRequest extends FormRequest
     public function callback(): View|RedirectResponse
     {
         $this->handle();
-        if ($this->socialite['action'] === 'register') return view('auth.register', ['user' => $this->socialUserData]);
-        return $this->authenticate();
+        return $this->socialite['action'] === 'login' || $this->userExists() ?
+            $this->authenticate() :
+            view('auth.register', ['user' => $this->socialUserData]);
+    }
+
+    private function userExists(): bool
+    {
+        $this->user = User::whereEmail($this->socialUserData['email'])->first();
+        return (bool)$this->user;
     }
 
     private function authenticate(): RedirectResponse
     {
+        Auth::login($this->user);
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 }
