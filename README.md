@@ -6,17 +6,17 @@
  
 **`Laravel 10`**
 
-⚠️ `PHP >= 8.1`
-⚠️ `Ctype PHP Extension`
-⚠️ `cURL PHP Extension`
-⚠️ `DOM PHP Extension`
-⚠️ `Fileinfo PHP Extension`
-⚠️ `Filter PHP Extension`
-⚠️ `Hash PHP Extension`
-⚠️ `Mbstring PHP Extension`
-⚠️  `OpenSSL PHP Extension`
-⚠️ `PCRE PHP Extension`
-⚠️ `PDO PHP Extension`
-⚠️ `Session PHP Extension`
-⚠️ `Tokenizer PHP Extension`
-⚠️ `XML PHP Extension`
+⚠️ `PHP >= 8.1`<br/>
+⚠️ `Ctype PHP Extension`<br/>
+⚠️ `cURL PHP Extension`<br/>
+⚠️ `DOM PHP Extension`<br/>
+⚠️ `Fileinfo PHP Extension`<br/>
+⚠️ `Filter PHP Extension`<br/>
+⚠️ `Hash PHP Extension`<br/>
+⚠️ `Mbstring PHP Extension`<br/>
+⚠️  `OpenSSL PHP Extension`<br/>
+⚠️ `PCRE PHP Extension`<br/>
+⚠️ `PDO PHP Extension`<br/>
+⚠️ `Session PHP Extension`<br/>
+⚠️ `Tokenizer PHP Extension`<br/>
+⚠️ `XML PHP Extension`<br/>
